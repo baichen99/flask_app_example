@@ -1,9 +1,10 @@
 from app import create_app
 from flask.cli import with_appcontext, FlaskGroup
 from databases import db
-from models.User import User
+from models.user import User
 import faker
 import click
+from utils.password import generate_password_hash
 
 # https://flask.palletsprojects.com/en/2.0.x/cli/#custom-commands
 # https://stackoverflow.com/questions/50298565/flask-factory-pattern-and-flask-cli-commands/51923415
@@ -21,9 +22,10 @@ def initdb():
 @with_appcontext
 def initUser():
   fake = faker.Faker()
-  users = []
   for i in range(5):
-    user = User(username=fake.name(), password='password', email=f"{fake.name().replace(' ', '')}@mail.com")
+    name = fake.name()
+    password = generate_password_hash(name)
+    user = User(username=name, password=password, email=f"{name.replace(' ', '')}@test.com")
     db.session.add(user)
   db.session.commit()
 if __name__ == '__main__':

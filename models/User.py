@@ -1,8 +1,11 @@
 from databases import db
+from models.base import Base
+import uuid
 
 
-class User(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
+class User(Base):
+  __tablename__ = 'users'
+  
   username = db.Column(
     db.String(64),
     index=True,

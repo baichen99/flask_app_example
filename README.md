@@ -1,5 +1,12 @@
 # flask file structure
 
+## Usage
+
+```shell
+python manage.py initdb
+python manage.py init-user
+```
+
 ## RESTful
 
 Use [flask_restful](https://flask-restful.readthedocs.io/en/latest/) framework to implement RESTful style api
@@ -17,11 +24,22 @@ Use `Flask.config.from_object` set config from an ojbect, and to better manage e
 
 [flask_sqlalchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x) is an extension for Flask that adds support for SQLAlchemy to your application. It aims to simplify using SQLAlchemy with Flask by providing useful defaults and extra helpers that make it easier to accomplish common tasks.
 
+## JWT
+
+[Flask-JWT-Extended’s Documentation](https://flask-jwt-extended.readthedocs.io/en/stable/)
+
+[How to use jwt in flask](https://www.jianshu.com/p/c155c2b7af42)
+
+[difference between refresh token and access token](https://stackoverflow.com/questions/27726066/jwt-refresh-token-flow)
+
 ## Questions
 
 1. [Access a Flask extension that is defined in the app factory](https://stackoverflow.com/questions/38443938/access-a-flask-extension-that-is-defined-in-the-app-factory)
 2. [circular dependency problem](https://stackoverflow.com/questions/59156895/cannot-import-name-mydb-from-partially-initialized-module-connection-in-pyth)
 
+## Inspiration
+
+[jinlygenius/flask_structure_example](https://github.com/jinlygenius/flask_structure_example)
 ## todo
 - logger
 - i18n

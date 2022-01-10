@@ -4,10 +4,11 @@ from marshmallow import (
   validate, 
   post_load, 
 )
-from models.User import User
+from models.user import User
 
 # for serializing and deserializing
 class UserSchema(Schema):
+  id = fields.String()
   username = fields.String()
   password = fields.String(load_only=True)  # write only, can not read
   email = fields.Email()

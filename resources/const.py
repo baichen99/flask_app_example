@@ -1,5 +1,3 @@
-from flask import Response
-
 StatusOK = 200
 StatusCreated = 201
 StatusNoContent = 204
