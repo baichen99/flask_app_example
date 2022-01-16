@@ -2,6 +2,17 @@
 
 ## Usage
 
+create `.env` file, edit the file as follows.
+
+```
+# .env
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=123456
+MYSQL_DB=rest
+```
+
 ```shell
 python manage.py initdb
 python manage.py init-user
@@ -41,8 +52,7 @@ Use `Flask.config.from_object` set config from an ojbect, and to better manage e
 
 [jinlygenius/flask_structure_example](https://github.com/jinlygenius/flask_structure_example)
 ## todo
-- logger
+
 - i18n
 - cors
-- auth 
 - middlewares
