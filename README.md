@@ -16,6 +16,7 @@ MYSQL_DB=rest
 ```shell
 python manage.py initdb
 python manage.py init-user
+flask run
 ```
 
 ## RESTful
