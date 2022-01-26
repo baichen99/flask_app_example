@@ -2,9 +2,9 @@ from flask_restful import Resource, request
 from utils.password import check_password_hash
 from serializers.auth import UserLoginSchema
 from services.user import UserService
-from utils.response import makeErrorResponse
 from resources.const import *
 from flask_jwt_extended import create_access_token, create_refresh_token
+from werkzeug.exceptions import *
 
 class UserLogin(Resource):
 
@@ -15,9 +15,14 @@ class UserLogin(Resource):
     username = form.get('username', '')
     password = form.get('password', '')
     if username == '' or password == '':
-      return makeErrorResponse(Exception('infomation not complete'), status_code=StatusBadRequests)
+      raise BadRequest(
+        description='Infomation not complete'
+    )
     if not UserService.checkPassword(username, password):
-      return makeErrorResponse(Exception('username and password do not match'), status_code=StatusBadRequests)
+      raise BadRequest(
+        description='Username and password do not match'
+    )
+
     # return jwt token
     access_token = create_access_token(identity=username)
     refresh_token = create_refresh_token(identity=username)

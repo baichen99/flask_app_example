@@ -1,23 +1,25 @@
 import os
-from flask import Flask, g
+import logging
+from flask import Flask
 from models.user import User
 from databases import db
 from serializers import ma
 from resources.user import UserList
 from resources.auth import UserLogin
 from flask_restful import Api
-import logging
 from logging.config import dictConfig
 from log_settings import LOGGING
 from dotenv import load_dotenv, find_dotenv
 from resources import jwt
+from utils.error import ExtendedAPI
 
 
 def create_app(mode='devlopment'):
   load_dotenv()
-  import settings  
+  import settings
   app = Flask(__name__)
-  api = Api(app)
+  # rewrite handle_err
+  api = ExtendedAPI(app)
   app.config.from_object(settings)
   db.init_app(app)
   ma.init_app(app)
@@ -40,7 +42,7 @@ def create_app(mode='devlopment'):
     
   # add routes
   api.add_resource(UserList, '/user/<string:id>', endpoint='userList',methods=['PUT', 'DELETE'])
-  api.add_resource(UserList, '/user', endpoint='createUser', methods=['POST', 'GET'])
+  api.add_resource(UserList, '/user', endpoint='user', methods=['POST', 'GET'])
   api.add_resource(UserLogin, '/login', endpoint='userLogin', methods=['POST'])
   return app
 

@@ -1,14 +1,17 @@
 from databases import db
+import sqlalchemy
 from models.user import User
 from utils.password import check_password_hash
+from werkzeug.exceptions import *
 
 class UserService:  
   @staticmethod
   def getUserById(id):
-    try:
-      user = User.query.get(id)
-    except Exception as err:
-      return err
+    user = User.query.get(id)
+    if not user:
+      raise NotFound(
+        description="Cannot find the user record"
+      )
     return user
   
   @staticmethod
@@ -16,7 +19,9 @@ class UserService:
     try:
       user = User.query.filter_by(**data).all()
     except Exception as err:
-      return err
+      raise BadRequest(
+        description="Query params for user is invalid"
+      )
     return user
   
   @staticmethod
@@ -24,28 +29,24 @@ class UserService:
     try:
       db.session.add(user)
       db.session.commit()
-    except Exception as err:
-      return err
+    # cannot catch pymysql.err.IntergrityError
+    except sqlalchemy.exc.IntegrityError as e:
+      raise Conflict(
+        description="User record already exists",
+      )
     return user.id
   
   @staticmethod
   def deleteUser(id):
     user = UserService.getUserById(id)
-    if user is None:
-      return
-    elif isinstance(user, Exception):
-      return user
     db.session.delete(user)
-    db.session.commit()
+    db.session.commit()    
     return
     
   @staticmethod
   def updateUser(id, data):
-    try:
-      User.query.filter_by(id=id).update(data)
-      db.session.commit()
-    except Exception as err:
-      return err
+    User.query.filter_by(id=id).update(data)
+    db.session.commit()
     return
   
   @staticmethod

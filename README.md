@@ -19,6 +19,12 @@ python manage.py init-user
 flask run
 ```
 
+## test
+
+```shell
+python manage.py test
+```
+
 ## RESTful
 
 Use [flask_restful](https://flask-restful.readthedocs.io/en/latest/) framework to implement RESTful style api
@@ -43,6 +49,16 @@ Use `Flask.config.from_object` set config from an ojbect, and to better manage e
 [How to use jwt in flask](https://www.jianshu.com/p/c155c2b7af42)
 
 [difference between refresh token and access token](https://stackoverflow.com/questions/27726066/jwt-refresh-token-flow)
+
+## Unittest
+
+[Unit testing framework](https://docs.python.org/zh-cn/3/library/unittest.html)
+[flask test](https://dormousehole.readthedocs.io/en/latest/testing.html)
+[【Flask 教學】實作 Flask 單元測試 Unit Test](https://www.maxlist.xyz/2020/08/17/flask-unittest/)
+
+## Custom error handler
+
+[flask-restful-custom-error-handling](https://stackoverflow.com/questions/41149409/flask-restful-custom-error-handling)
 
 ## Questions
 
